@@ -33,9 +33,9 @@ const DealOfDaySection = () => {
 
   return (
     <>
-    <div className="m-4 ml-30 bg-white w-max rounded-lg p-8">
+    <div className="m-auto mt-5 bg-white w-[90vw] rounded-lg">
       <h1 className="text-4xl m-4" > Deals Of The Day</h1>
-      <div className="flex flex-row flex-wrap gap-x-10">
+      <div className="flex flex-wrap gap-x-10">
       {couponDetails?.map((value, index) => {
         return (
           <CouponCard

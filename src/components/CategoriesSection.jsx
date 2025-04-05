@@ -27,9 +27,9 @@ const CategoriesSection = () => {
 
   return (
     <>
-    <div>
-      <h1 className="text-4xl m-10 ml-60">Categories</h1>
-      <div className="flex flex-row flex-wrap gap-x-8 gap-y-8 w-350  justify-center items-center ml-30">
+    <div className="w-[90vw] m-auto mt-5 flex flex-col gap-y-5 bg-white rounded-lg">
+      <h1 className="text-4xl">Categories</h1>
+      <div className="flex flex-wrap gap-8 items-center justify-center">
         {category?.map((value,index)=>{
           return <CategoryCard key={index} image={value.image} name={value.name} totalCoupons={value.totalCoupons} />
         })}

@@ -30,7 +30,7 @@ const TopStoresSection = () => {
     },[]);
 
   return (
-    <div className='w-[75%] m-auto'>
+    <div className='w-[90vw] m-auto mt-5'>
         <div className='flex justify-between mb-10 items-center'>
             <h1 className='text-4xl'>Top Stores</h1>
             <button className=' text-orange-300 text-2xl rounded cursor-pointer'>Visit All Stores</button>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
+import img from '../../assets/caraousel_image.webp'
 const images = [
   { src: 'https://images.unsplash.com/photo-1624521793559-136bfe16fc86?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Slide 1' },
-  { src: 'https://images.unsplash.com/photo-1522780550166-284a0288c8df?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YW1hem9ufGVufDB8fDB8fHww', alt: 'Slide 2' },
+  { src: img, alt: 'Slide 2' },
   { src: 'https://images.unsplash.com/photo-1590599145008-e4ec48682067?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGFtYXpvbnxlbnwwfHwwfHx8MA%3D%3D', alt: 'Slide 3' },
 ];
 
