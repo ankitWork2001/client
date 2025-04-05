@@ -18,7 +18,7 @@ const CategoriesSection = () => {
     };
     async function makeRequest() {
       let response = await axios.request(config);
-      console.log(response.data.categories);
+      // console.log(response.data.categories);
       setCategory(response?.data?.categories);
     }
 
