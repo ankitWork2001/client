@@ -1,11 +1,21 @@
+import React from "react";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import HeroBanner from "./components/HeroBanner";
+
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-blue-600">
-        Hello Tailwind CSS with Vite!
-      </h1>
+    <div className="flex flex-col min-h-screen">
+
+      <Navbar />
+
+      <main className="flex-grow">
+        <HeroBanner/>
+      </main>
+
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
