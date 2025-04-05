@@ -19,7 +19,7 @@ const DealOfDaySection = () => {
     };
     async function makeRequest() {
       let response = await axios.request(config);
-      console.log(response.data);
+      // console.log(response.data);
       let data = response.data;
       setCouponDetails(
         data.filter((value) => {

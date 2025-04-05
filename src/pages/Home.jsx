@@ -3,6 +3,7 @@ import HeroBanner from "../components/HeroBanner";
 import DealOfDaySection from "../components/DealOfDaySection";
 import TopStoresSection from "../components/TopStoresSection";
 import CategoriesSection from "../components/CategoriesSection";
+import VariousCategorySection from "../components/VariousCategorySection";
 
 function Home() {
   return (
@@ -16,6 +17,7 @@ function Home() {
       <DealOfDaySection/>
       <TopStoresSection/>
       <CategoriesSection/>
+      <VariousCategorySection/>
 
       
     </div>
