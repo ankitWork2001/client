@@ -47,7 +47,7 @@ const VariousCategorySection = () => {
 const IndividualCategorySection = ({coupons,name}) => {
     
     return (
-        <div className="mb-12">
+        <div id={name} className="mb-12">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold mb-6 pb-2 border-b-2 border-blue-500 inline-block">{name}</h2>
                 <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded transition-colors duration-300 cursor-pointer">View More</button>
