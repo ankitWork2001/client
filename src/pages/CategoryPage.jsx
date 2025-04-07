@@ -2,10 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import CouponCard from "../components/CouponCard";
+import { useSelector } from "react-redux";
 
 const CategoryPage = () => {
   const [category, setCategory] = useState();
-
+  const catogoryId = useSelector((state) => state.category.categoryId);
+  const categoryName = useSelector((state) => state.category.categoryName);
   useEffect(() => {
     let config = {
       method: "get",
@@ -19,22 +21,28 @@ const CategoryPage = () => {
     async function makeRequest() {
       let response = await axios.request(config);
       let data = response.data;
+      if(catogoryId!=null) {
+
+      
       setCategory(
         data.filter((value) => {
-          return value?.category?._id == "67f02a864b8cee1e4ea2f61c";
+          return value?.category?._id == catogoryId ;
         })
       );
+      }else{
+        setCategory(data);
+      }
     }
 
     makeRequest();
-  }, []);
+  }, [catogoryId]);
 
   return (
     <>
       <div className="m-auto">
         {category?.length > 0 && (
           <h1 className="text-4xl text-center m-auto mt-10 mb-10 font-semibold">
-            {category[0]?.category?.name} : Best Deals
+            {categoryName} : Best Deals
           </h1>
         )}
 
@@ -63,7 +71,7 @@ const CategoryPage = () => {
               </p>
               <form className="flex flex-col gap-y-1">
                 <label className="text-[1.25rem]">Category</label>
-                <select className="text-[1rem] border-1 border-gray-300 rounded-lg p-2">
+                <select className="text-[1rem] border-1 border-gray-300 rounded-lg p-2" value={categoryName}>
                   <option value="Travel">Travel</option>
                   <option value="Education">Education</option>
                   <option value="Electronics">Electronics</option>
