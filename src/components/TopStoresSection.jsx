@@ -1,7 +1,11 @@
 import React, { useEffect,useState } from 'react'
 import axios from 'axios';
 import StoreCard from './StoreCard';
+import {Link} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {resetStore } from '../redux/storeSlice';
 const TopStoresSection = () => {
+    const dispatch = useDispatch();
     const [stores, setStores] = useState([]);
     useEffect(()=>{
         let config = {
@@ -33,12 +37,14 @@ const TopStoresSection = () => {
     <div className='w-[90vw] m-auto mt-5'>
         <div className='flex justify-between mb-10 items-center'>
             <h1 className='text-4xl'>Top Stores</h1>
-            <button className=' text-orange-300 text-2xl rounded cursor-pointer'>Visit All Stores</button>
+            <Link to='/store' onClick={()=>{dispatch(resetStore())}}>
+            <button className=' text-orange-300 text-2xl rounded cursor-pointer' >Visit All Stores</button>
+            </Link>
         </div>
         <div className='flex flex-wrap gap-x-8 gap-y-8 justify-center items-center bg-amber-200 p-10 rounded-lg'>
             {stores?.map((value,index)=>{
                 return (
-                    <StoreCard key={index} logo={value.logo} name={value.name} totalCoupons={value.totalCoupons} />
+                    <StoreCard key={index} logo={value.logo} name={value.name} totalCoupons={value.totalCoupons} id={value._id} />
                 )
             })}
         </div>

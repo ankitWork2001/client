@@ -1,8 +1,21 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import { setStoreId,setStoreName } from '../redux/storeSlice';
+import { useNavigate } from 'react-router-dom';
+const StoreCard = ({logo,name,totalCoupons,id}) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleClick = () => {
+    console.log(`Clicked on ${name}`);
+    dispatch(setStoreId(id));
+    dispatch(setStoreName(name));
 
-const StoreCard = ({logo,name,totalCoupons}) => {
+    navigate(`/store`);
+  };
   return (
-    <div className='bg-amber-50 flex flex-col justify-center items-center border-3 rounded-lg border-yellow-500 min-w-[20vw] min-h-[15vw] gap-2 p-5'>
+    <div className='bg-amber-50 flex flex-col justify-center items-center border-3 rounded-lg border-yellow-500 min-w-[20vw] min-h-[15vw] gap-2 p-5 cursor-pointer'
+    onClick={handleClick}
+    >
 
       <img 
         src={logo} 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setCategoryId, setCategoryName } from "../redux/categorySlice";
-import { setStoreId,setStoreName } from "../redux/storeSlice";
+import { resetStore } from "../redux/storeSlice";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -46,8 +46,8 @@ const Navbar = () => {
               Categories
             </Link>
             <Link to="/store" className="hover:underline" onClick={()=>{
-              dispatch(setStoreId(null));
-              dispatch(setStoreName('All Stores'));
+              dispatch(resetStore());
+             
             }}>
               Top Stores
             </Link>

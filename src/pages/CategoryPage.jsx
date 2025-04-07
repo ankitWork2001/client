@@ -72,6 +72,7 @@ const CategoryPage = () => {
               <form className="flex flex-col gap-y-1">
                 <label className="text-[1.25rem]">Category</label>
                 <select className="text-[1rem] border-1 border-gray-300 rounded-lg p-2" value={categoryName}>
+                  <option value="All Categories">All Categories</option>
                   <option value="Travel">Travel</option>
                   <option value="Education">Education</option>
                   <option value="Electronics">Electronics</option>

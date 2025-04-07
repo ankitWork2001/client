@@ -3,8 +3,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import CouponCard from "../components/CouponCard";
 import macbook from "../../assets/dealoftheday_image.jpg";
+import { useSelector } from "react-redux";
 const StorePage = () => {
   const [store, setStore] = useState();
+  const storeId = useSelector((state) => state.store.storeId);
+  const storeName = useSelector((state) => state.store.storeName);
 
   useEffect(() => {
     let config = {
@@ -19,22 +22,26 @@ const StorePage = () => {
     async function makeRequest() {
       let response = await axios.request(config);
       let data = response.data;
+      if(storeId == null) {
+        setStore(data);
+      } else {
       setStore(
         data.filter((value) => {
-          return value?.store?._id == "67f028f64b8cee1e4ea2f60a";
+          return value?.store?._id == storeId;
         })
       );
     }
+  }
 
     makeRequest();
-  }, []);
+  }, [storeId]);
 
   return (
     <>
       <div className="m-auto">
         {store?.length > 0 && (
           <h1 className="text-4xl text-center m-auto mt-10 mb-10 font-semibold">
-            {store[0]?.store?.name} : Best Deals
+            {storeName} : Best Deals
           </h1>
         )}
 
@@ -53,7 +60,8 @@ const StorePage = () => {
               <p className="text-orange-600 text-right text-1xl hover:cursor-pointer">Clear All</p>
               <form className="flex flex-col gap-y-1" >
                 <label className="text-[1.25rem]" >Store</label>
-                <select className="text-[1rem] border-1 border-gray-300 rounded-lg p-2" >
+                <select className="text-[1rem] border-1 border-gray-300 rounded-lg p-2" value={storeName} >
+                  <option value="All Stores">All Stores</option>
                   <option value="Amazon">Amazon</option>
                   <option value="Flipkart">Flipkart</option>
                   <option value="Myntra">Myntra</option>

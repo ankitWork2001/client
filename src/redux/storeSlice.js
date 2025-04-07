@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState ={
-    storeId:'',
-    storeName:'',
+    storeId:null,
+    storeName:'All Stores',
 }
 
 const storeSlice = createSlice({
@@ -15,8 +15,13 @@ const storeSlice = createSlice({
         setStoreName: (state, action) => {
             state.storeName = action.payload;
         },
+        resetStore: (state) => {
+            state.storeId = null;
+            state.storeName = 'All Stores';
+            
+        },
     },
 })
 
-export const { setStoreId, setStoreName } = storeSlice.actions
+export const { setStoreId, setStoreName, resetStore } = storeSlice.actions
 export default storeSlice.reducer
