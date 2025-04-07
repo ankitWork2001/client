@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import {useDispatch } from 'react-redux'
+import { setCategoryId,setCategoryName } from '../redux/categorySlice'
 const VariousCategorySection = () => {
     const [categories, setCategories] = React.useState()
     useEffect(()=>{
@@ -45,12 +48,22 @@ const VariousCategorySection = () => {
 }
 
 const IndividualCategorySection = ({coupons,name}) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleClick = () => {
+
+        console.log(`Viewing more coupons for ${name} ${coupons[0].category._id}`);
+        dispatch(setCategoryId(coupons[0].category._id))
+        dispatch(setCategoryName(name))
+        navigate(`/category`);
+        
+    };
     
     return (
         <div id={name} className="mb-12">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold mb-6 pb-2 border-b-2 border-blue-500 inline-block">{name}</h2>
-                <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded transition-colors duration-300 cursor-pointer">View More</button>
+                <button onClick={handleClick} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded transition-colors duration-300 cursor-pointer">View More</button>
             </div>
             <div className="flex flex-wrap gap-20 p-5 rounded-lg" style={{ background: 'linear-gradient(to top, #1E3A8A, #BFDBFE)' }}>
                 {coupons.slice(0, 3).map((coupon) => (
