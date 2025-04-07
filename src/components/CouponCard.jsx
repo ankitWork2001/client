@@ -3,7 +3,7 @@ import React from 'react';
 const CouponCard = ({companylogo,image,minPurchase,description}) => {
   return (
     <>
-    <div className='flex flex-col  bg-gray-100 m-4 p-3 w-max rounded-lg'>
+    <div className='flex flex-col  bg-gray-100 m-4 p-3 w-max rounded-lg h-[40vh]'>
       <div className='flex flex-row gap-x-10 m-2 '>
         <div>
           <img src={companylogo} alt="company-name" className='h-30 mix-blend-multiply opacity-100' />
