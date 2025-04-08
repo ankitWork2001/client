@@ -1,109 +1,51 @@
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Pencil, Trash2 } from "lucide-react";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const couponsData = [
-  {
-    id: 1,
-    store: "Amazon",
-    category: "Laptop",
-    couponCode: "MACSAVE10",
-    discountType: "Flat Discount",
-    expiryDate: "30th April",
-    status: "Active",
-    clicks: 3200,
-    users: 500,
-  },
-  {
-    id: 2,
-    store: "Amazon",
-    category: "Laptop",
-    couponCode: "MACSAVE10",
-    discountType: "Flat Discount",
-    expiryDate: "30th April",
-    status: "Active",
-    clicks: 3200,
-    users: 500,
-  },
-  {
-    id: 3,
-    store: "Amazon",
-    category: "Laptop",
-    couponCode: "MACSAVE10",
-    discountType: "Flat Discount",
-    expiryDate: "30th April",
-    status: "Active",
-    clicks: 3200,
-    users: 500,
-  },
-];
+const Dashboard = () => {
+  const [stats, setStats] = useState({
+    coupons: 0,
+    stores: 0,
+    categories: 0,
+  });
 
-export default function CouponsManagement() {
-  const [coupons, setCoupons] = useState(couponsData);
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const [couponsRes, storesRes, categoriesRes] = await Promise.all([
+          axios.get('/api/coupons'),
+          axios.get('/api/stores'),
+          axios.get('/api/categories'),
+        ]);
 
-  const handleDelete = (id) => {
-    const updatedCoupons = coupons.filter((coupon) => coupon.id !== id);
-    setCoupons(updatedCoupons);
-  };
+        setStats({
+          coupons: couponsRes.data.length || 0,
+          stores: storesRes.data.count || 0,
+          categories: categoriesRes.data.length || 0,
+        });
+      } catch (err) {
+        console.error('Dashboard fetch error:', err);
+      }
+    };
 
-  const handleEdit = (id) => {
-    console.log("Edit coupon with id:", id);
-    // Redirect to edit page or open modal here
-  };
+    fetchStats();
+  }, []);
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Coupons Management</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full border rounded">
-          <thead className="bg-blue-600 text-white">
-            <tr>
-              <th className="p-2 text-left">Store</th>
-              <th className="p-2 text-left">Category</th>
-              <th className="p-2 text-left">Coupon Code</th>
-              <th className="p-2 text-left">Discount Type</th>
-              <th className="p-2 text-left">Expiry Date</th>
-              <th className="p-2 text-left">Status</th>
-              <th className="p-2 text-left">Clicks</th>
-              <th className="p-2 text-left">Users</th>
-              <th className="p-2 text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {coupons.map((coupon) => (
-              <tr key={coupon.id} className="border-b">
-                <td className="p-2">{coupon.store}</td>
-                <td className="p-2">{coupon.category}</td>
-                <td className="p-2 text-pink-600 font-medium">{coupon.couponCode}</td>
-                <td className="p-2">{coupon.discountType}</td>
-                <td className="p-2 text-red-500 font-medium">{coupon.expiryDate}</td>
-                <td className="p-2 text-green-500">{coupon.status}</td>
-                <td className="p-2">{coupon.clicks.toLocaleString()}</td>
-                <td className="p-2">{coupon.users}</td>
-                <td className="p-2 flex gap-2">
-                  <Button className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-3 py-1 rounded">
-                    Deal Of the Day
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="p-2"
-                    onClick={() => handleDelete(coupon.id)}
-                  >
-                    <Trash2 size={16} className="text-red-600" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="p-2"
-                    onClick={() => handleEdit(coupon.id)}
-                  >
-                    <Pencil size={16} className="text-blue-600" />
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="bg-blue-100 p-4 rounded-xl shadow-md">
+        <h2 className="text-xl font-semibold">Total Coupons</h2>
+        <p className="text-3xl mt-2">{stats.coupons}</p>
+      </div>
+      <div className="bg-green-100 p-4 rounded-xl shadow-md">
+        <h2 className="text-xl font-semibold">Total Stores</h2>
+        <p className="text-3xl mt-2">{stats.stores}</p>
+      </div>
+      <div className="bg-yellow-100 p-4 rounded-xl shadow-md">
+        <h2 className="text-xl font-semibold">Total Categories</h2>
+        <p className="text-3xl mt-2">{stats.categories}</p>
       </div>
     </div>
   );
-}
+};
+
+export default Dashboard;
