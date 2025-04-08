@@ -5,17 +5,16 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import CategoryPage from "./pages/CategoryPage";
 import StorePage from "./pages/StorePage";
+import Login from "./admin/Login";
+import Signup from "./admin/Signup";
 
-// Create a layout component that includes Navbar and Footer
-const Layout = () => {
-  return (
-    <>
-      <Navbar />
-      <Outlet />
-      <Footer />
-    </>
-  );
-};
+const Layout = () => (
+  <>
+    <Navbar />
+    <Outlet />
+    <Footer />
+  </>
+);
 
 const router = createBrowserRouter([
   {
@@ -33,9 +32,17 @@ const router = createBrowserRouter([
       {
         path: "/store",
         element: <StorePage />,
-      }
-    ]
-  }
+      },
+    ],
+  },
+  {
+    path: "/admin/login",
+    element: <Login />,
+  },
+  {
+    path: "/admin/signup",
+    element: <Signup />,
+  },
 ]);
 
 function App() {
