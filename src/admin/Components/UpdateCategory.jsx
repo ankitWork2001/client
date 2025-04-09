@@ -20,7 +20,7 @@ const UpdateCategory = ({ id }) => {
     let newData = JSON.stringify(data);
     try {
       const formData = new FormData();
-      formDataToSend.append("image", e.target.image.files[0]);
+      formData.append("image", e.target.image.files[0]);
       formData.append("totalCoupons", data.totalCoupons);
 
       let response = await axios.put(
