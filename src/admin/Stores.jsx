@@ -6,7 +6,8 @@ import UpdateStore from "./Components/UpdateStore";
 const Stores = () => {
   const [stores, setStores] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [edit, setEdit] = useState(null); 
+  const [edit, setEdit] = useState(null);
+  const [add, setAdd] = useState(false);
 
   const fetchStores = async () => {
     try {
@@ -49,7 +50,16 @@ const Stores = () => {
 
   return (
     <div className="p-4">
-      <div className="text-xl font-semibold mb-4">Top Stores</div>
+      <div className="text-3xl font-semibold mb-4">Top Stores</div>
+      <button
+        className="m-2 ml-1 p-3 text-1xl border-2 border-blue-200 hover:cursor-pointer rounded-lg bg-blue-800 text-white hover:bg-pink-800"
+        onClick={() => {
+          setAdd(!add);
+        }}
+      >
+        Add Store
+      </button>
+      {add && <AddStore />}
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white shadow rounded-lg">
           <thead>
@@ -79,7 +89,9 @@ const Stores = () => {
                   <td className="py-3 px-4 flex gap-2">
                     <button
                       className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded"
-                      onClick={() => setEdit(edit === store._id ? null : store._id)} 
+                      onClick={() =>
+                        setEdit(edit === store._id ? null : store._id)
+                      }
                     >
                       <Pencil size={16} />
                     </button>
@@ -92,7 +104,7 @@ const Stores = () => {
                   </td>
                 </tr>
                 {edit === store._id && (
-                  <tr >
+                  <tr>
                     <td colSpan="10" className="py-4 m-4 ">
                       <UpdateStore id={store._id} />
                     </td>
@@ -111,6 +123,107 @@ const Stores = () => {
           </tbody>
         </table>
       </div>
+    </div>
+  );
+};
+
+const AddStore = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    logo: "",
+    totalCoupons: "",
+  });
+
+
+  const handleChange = (e) => {
+    const { name, value, type } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "number" ? Number(value) : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const payload = {
+        ...formData,
+        totalCoupons:
+          formData.totalCoupons === "" ? 0 : Number(formData.totalCoupons),
+      };
+
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("logo", e.target.logo.files[0]);
+      formDataToSend.append("totalCoupons", formData.totalCoupons || 0);
+
+      const res = await axios.post(
+        "http://localhost:3000/api/stores/",
+        formDataToSend,
+        {
+          headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+          },
+        }
+      );
+
+      alert("Store added successfully!");
+      setFormData({ name: "", logo: "", totalCoupons: "" });
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to add store");
+    }
+  };
+
+  return (
+    <div className="max-w-md mx-auto mt-10 mb-4 p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4 text-center">Add New Store</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block font-medium">Store Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="w-full border p-2 rounded mt-1"
+          />
+        </div>
+
+        <div>
+          <label className="block font-medium">Logo :</label>
+          <input
+            type="file"
+            name="logo"
+            onChange={handleChange}
+            required
+            className="w-full border p-2 rounded mt-1 hover:cursor-pointer"
+          />
+        </div>
+
+        <div>
+          <label className="block font-medium">Total Coupons:</label>
+          <input
+            type="number"
+            name="totalCoupons"
+            value={formData.totalCoupons}
+            onChange={handleChange}
+            className="w-full border p-2 rounded mt-1 "
+            min={0}
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+        >
+          Add Store
+        </button>
+      </form>
     </div>
   );
 };

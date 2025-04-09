@@ -17,17 +17,20 @@ const UpdateStore = ({ id }) => {
   }
   async function handleSubmit(e) {
     e.preventDefault();
-    let newData = JSON.stringify(data);
-    try{
+    const formData = new FormData();
+      formData.append("logo", e.target.logo.files[0]);
+      formData.append("totalCoupons", data.totalCoupons);
+
+    try {
       let response = await axios.put(
-        `http://localhost:3000/api/stores/${id}`,
-        newData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-            "Content-Type": "application/json",
-          },
-        }
+      `http://localhost:3000/api/stores/${id}`,
+      formData,
+      {
+        headers: {
+        Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        "Content-Type": "multipart/form-data",
+        },
+      }
       );
       alert("Store successfully updated")
     }

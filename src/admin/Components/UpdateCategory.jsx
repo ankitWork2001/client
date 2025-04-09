@@ -18,16 +18,20 @@ const UpdateCategory = ({ id }) => {
   async function handleSubmit(e) {
     e.preventDefault();
     let newData = JSON.stringify(data);
-    try{
+    try {
+      const formData = new FormData();
+      formDataToSend.append("image", e.target.image.files[0]);
+      formData.append("totalCoupons", data.totalCoupons);
+
       let response = await axios.put(
-        `http://localhost:3000/api/categories/${id}`,
-        newData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-            "Content-Type": "application/json",
-          },
-        }
+      `http://localhost:3000/api/categories/${id}`,
+      formData,
+      {
+        headers: {
+        Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        "Content-Type": "multipart/form-data",
+        },
+      }
       );
       alert("Category Updated Successfully")
     }

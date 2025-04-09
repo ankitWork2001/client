@@ -7,7 +7,8 @@ const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [edit,setEdit]=useState(null)
+  const [edit,setEdit]=useState(null);
+  const [add,setAdd]=useState(false);
 
   const fetchCategories = async () => {
     try {
@@ -32,7 +33,11 @@ const Categories = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this category?")) return;
     try {
-      await axios.delete(`http://localhost:3000/api/categories/${id}`);
+      await axios.delete(`http://localhost:3000/api/categories/${id}`,{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        }
+      });
       setCategories(categories.filter((cat) => cat._id !== id));
     } catch (err) {
       alert("Failed to delete category");
@@ -44,6 +49,15 @@ const Categories = () => {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Manage Categories</h1>
+      <button
+        className="m-2 ml-1 p-3 text-1xl border-2 border-blue-200 hover:cursor-pointer rounded-lg bg-blue-800 text-white hover:bg-pink-800"
+        onClick={() => {
+          setAdd(!add);
+        }}
+      >
+        Add Category
+      </button>
+      {add && <AddCategory />}
 
       {loading ? (
         <p>Loading...</p>
@@ -97,6 +111,99 @@ const Categories = () => {
           </table>
         </div>
       )}
+    </div>
+  );
+};
+
+const AddCategory = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    totalCoupons: "",
+    image: null,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, files } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "file" ? files[0] : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("image", e.target.image.files[0]);
+    data.append(
+      "totalCoupons",
+      formData.totalCoupons === "" ? 0 : formData.totalCoupons
+    );
+
+    try {
+      const res = await axios.post("http://localhost:3000/api/categories/", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization:`Bearer ${localStorage.getItem("adminToken")}`
+        },
+      });
+
+      alert("Category added successfully!");
+      setFormData({ name: "", totalCoupons: "", image: null });
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to add category.");
+    }
+  };
+
+  return (
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+      <h2 className="text-2xl font-semibold mb-4 text-center">Add New Category</h2>
+
+      <form onSubmit={handleSubmit} className="space-y-4" encType="multipart/form-data">
+        <div>
+          <label className="block font-medium">Category Name</label>
+          <input
+            type="text"
+            name="name"
+            required
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full border p-2 rounded mt-1"
+          />
+        </div>
+
+        <div>
+          <label className="block font-medium">Image File</label>
+          <input
+            type="file"
+            name="image"
+            onChange={handleChange}
+            className="w-full border p-2 rounded mt-1 hover:cursor-pointer"
+          />
+        </div>
+
+        <div>
+          <label className="block font-medium">Total Coupons (optional)</label>
+          <input
+            type="number"
+            name="totalCoupons"
+            value={formData.totalCoupons}
+            onChange={handleChange}
+            className="w-full border p-2 rounded mt-1"
+            min={0}
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+        >
+          Add Category
+        </button>
+      </form>
     </div>
   );
 };
