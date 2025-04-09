@@ -33,7 +33,7 @@ const Stores = () => {
     try {
       await axios.delete(`http://localhost:3000/api/stores/${id}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("adminToken")}`, // Fixed token mismatch
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`, 
         },
       });
       setStores((prev) => prev.filter((store) => store._id !== id));

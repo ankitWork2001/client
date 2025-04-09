@@ -29,7 +29,11 @@ const Coupons = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this coupon?")) {
       try {
-        await axios.delete(`http://localhost:3000/api/coupons/${id}`);
+        await axios.delete(`http://localhost:3000/api/coupons/${id}`,{
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+          }
+        });
         setCoupons(coupons.filter((coupon) => coupon._id !== id));
       } catch (err) {
         console.error('Error deleting coupon:', err);
