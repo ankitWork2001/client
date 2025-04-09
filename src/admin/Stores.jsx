@@ -8,9 +8,9 @@ const Stores = () => {
 
   const fetchStores = async () => {
     try {
-      const { data } = await axios.get('/api/stores', {
+      const { data } = await axios.get('http://localhost:3000/api/stores', {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
         },
       });
       setStores(data.stores);
@@ -26,7 +26,7 @@ const Stores = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`/api/stores/${id}`, {
+      await axios.delete(`http://localhost:3000/api/stores/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },

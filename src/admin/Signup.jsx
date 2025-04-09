@@ -19,7 +19,7 @@ const Signup = () => {
     setSuccess("");
     setLoading(true);
     try {
-      const res = await axios.post("/api/admin/signup", {
+      const res = await axios.post("http://localhost:3000/api/auth/signup", {
         name,
         email,
         password,

@@ -7,6 +7,10 @@ import CategoryPage from "./pages/CategoryPage";
 import StorePage from "./pages/StorePage";
 import Login from "./admin/Login";
 import Signup from "./admin/Signup";
+import AdminDashboard from "./admin/Dashboard"
+import AdminCategories from "./admin/Categories"
+import AdminStores from "./admin/Stores"
+import AdminCoupons from "./admin/Coupons"
 
 const Layout = () => (
   <>
@@ -43,6 +47,22 @@ const router = createBrowserRouter([
     path: "/admin/signup",
     element: <Signup />,
   },
+  {
+    path:"/admin/dashboard",
+    element:<AdminDashboard/>
+  },
+  {
+    path:"/admin/categories",
+    element:<AdminCategories/>
+  },
+  {
+    path:"/admin/stores",
+    element:<AdminStores/>
+  },
+  {
+    path:"/admin/coupons",
+    element:<AdminCoupons/>
+  }
 ]);
 
 function App() {

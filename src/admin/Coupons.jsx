@@ -13,7 +13,11 @@ const Coupons = () => {
 
   const fetchCoupons = async () => {
     try {
-      const res = await axios.get('/api/coupons');
+      const res = await axios.get('http://localhost:3000/api/coupons', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
+        },
+      });
       setCoupons(res.data);
     } catch (err) {
       console.error('Error fetching coupons:', err);
@@ -23,7 +27,7 @@ const Coupons = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this coupon?")) {
       try {
-        await axios.delete(`/api/coupons/${id}`);
+        await axios.delete(`http://localhost:3000/api/coupons/${id}`);
         setCoupons(coupons.filter((coupon) => coupon._id !== id));
       } catch (err) {
         console.error('Error deleting coupon:', err);

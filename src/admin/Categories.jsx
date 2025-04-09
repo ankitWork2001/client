@@ -10,7 +10,11 @@ const Categories = () => {
   const fetchCategories = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("/api/categories");
+      const res = await axios.get("http://localhost:3000/api/categories", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
+      });
       setCategories(res.data.categories);
       setLoading(false);
     } catch (err) {
@@ -26,7 +30,7 @@ const Categories = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this category?")) return;
     try {
-      await axios.delete(`/api/categories/${id}`);
+      await axios.delete(`http://localhost:3000/api/categories/${id}`);
       setCategories(categories.filter((cat) => cat._id !== id));
     } catch (err) {
       alert("Failed to delete category");
