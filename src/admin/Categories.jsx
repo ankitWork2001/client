@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaTrash, FaEdit } from "react-icons/fa";
+import UpdateCategory from "./Components/UpdateCategory";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [edit,setEdit]=useState(null)
 
   const fetchCategories = async () => {
     try {
@@ -37,9 +39,7 @@ const Categories = () => {
     }
   };
 
-  const handleEdit = (id) => {
-    console.log("Edit category with ID:", id);
-  };
+
 
   return (
     <div className="p-4">
@@ -62,6 +62,7 @@ const Categories = () => {
             </thead>
             <tbody>
               {categories.map((cat) => (
+                <React.Fragment key={cat._id}>
                 <tr key={cat._id} className="border-t">
                   <td className="p-3">
                     <img src={cat.image} alt={cat.name} className="w-12 h-12 rounded object-cover" />
@@ -70,7 +71,7 @@ const Categories = () => {
                   <td className="p-3">{cat.totalCoupons}</td>
                   <td className="p-3 flex space-x-3">
                     <button
-                      onClick={() => handleEdit(cat._id)}
+                      onClick={() => setEdit(edit === cat._id ? null : cat._id)} 
                       className="text-blue-600 hover:text-blue-800"
                     >
                       <FaEdit />
@@ -83,6 +84,14 @@ const Categories = () => {
                     </button>
                   </td>
                 </tr>
+                {edit === cat._id && (
+                  <tr >
+                    <td colSpan="10" className="py-4 m-4 ">
+                      <UpdateCategory id={cat._id} />
+                    </td>
+                  </tr>
+                )}
+                </React.Fragment>
               ))}
             </tbody>
           </table>

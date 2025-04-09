@@ -38,7 +38,7 @@ const Navbar = () => {
           </Link>
 
           {/* Nav Links */}
-          <div className="flex space-x-20 mx-30 text-sm">
+          <div className="flex space-x-20 mx-30 text-lg">
             <Link to="/category" className="hover:underline" onClick={()=>{
               dispatch(setCategoryId(null));
               dispatch(setCategoryName('All Categories'));
@@ -61,6 +61,12 @@ const Navbar = () => {
             <a href="#" className="hover:underline">
               Share &amp; Earn
             </a>
+            <div>
+            <Link to={"/admin/signup"}>SignUp</Link>
+            <span> / </span>
+            <Link to={"/admin/login"}>Login</Link>
+            </div>
+            
           </div>
         </div>
       </nav>

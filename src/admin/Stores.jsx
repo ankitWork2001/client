@@ -1,46 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import { Pencil, Trash2 } from 'lucide-react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { Pencil, Trash2 } from "lucide-react";
+import axios from "axios";
+import UpdateStore from "./Components/UpdateStore";
 
 const Stores = () => {
   const [stores, setStores] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [edit, setEdit] = useState(null); 
 
   const fetchStores = async () => {
     try {
-      const { data } = await axios.get('http://localhost:3000/api/stores', {
+      const { data } = await axios.get("http://localhost:3000/api/stores", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
       });
       setStores(data.stores);
       setLoading(false);
     } catch (error) {
-      console.error('Failed to fetch stores:', error);
+      console.error("Failed to fetch stores:", error);
       setLoading(false);
     }
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm('Are you sure you want to delete this store?');
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this store?"
+    );
     if (!confirmDelete) return;
 
     try {
       await axios.delete(`http://localhost:3000/api/stores/${id}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`, // Fixed token mismatch
         },
       });
       setStores((prev) => prev.filter((store) => store._id !== id));
     } catch (error) {
-      console.error('Failed to delete store:', error);
+      console.error("Failed to delete store:", error);
     }
-  };
-
-  const handleEdit = (store) => {
-    // Open a modal or redirect to edit form with pre-filled values
-    console.log('Edit store:', store);
-    // For example: navigate(`/admin/edit-store/${store._id}`)
   };
 
   useEffect(() => {
@@ -66,33 +64,43 @@ const Stores = () => {
           </thead>
           <tbody>
             {stores.map((store, index) => (
-              <tr key={store._id} className="border-t">
-                <td className="py-3 px-4">{store.name}</td>
-                <td className="py-3 px-4">{store.totalCoupons}</td>
-                <td className="py-3 px-4">Yes</td>
-                <td className="py-3 px-4">
-                  {new Date(store.createdAt).toLocaleDateString('en-GB', {
-                    day: '2-digit',
-                    month: 'short',
-                  })}
-                </td>
-                <td className="py-3 px-4">{index + 1}</td>
-                <td className="py-3 px-4 flex gap-2">
-                  <button
-                    className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded"
-                    onClick={() => handleEdit(store)}
-                  >
-                    <Pencil size={16} />
-                  </button>
-                  <button
-                    className="bg-red-500 hover:bg-red-600 text-white p-2 rounded"
-                    onClick={() => handleDelete(store._id)}
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                </td>
-              </tr>
+              <React.Fragment key={store._id}>
+                <tr className="border-t">
+                  <td className="py-3 px-4">{store.name}</td>
+                  <td className="py-3 px-4">{store.totalCoupons}</td>
+                  <td className="py-3 px-4">Yes</td>
+                  <td className="py-3 px-4">
+                    {new Date(store.createdAt).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                    })}
+                  </td>
+                  <td className="py-3 px-4">{index + 1}</td>
+                  <td className="py-3 px-4 flex gap-2">
+                    <button
+                      className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded"
+                      onClick={() => setEdit(edit === store._id ? null : store._id)} 
+                    >
+                      <Pencil size={16} />
+                    </button>
+                    <button
+                      className="bg-red-500 hover:bg-red-600 text-white p-2 rounded"
+                      onClick={() => handleDelete(store._id)}
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </td>
+                </tr>
+                {edit === store._id && (
+                  <tr >
+                    <td colSpan="10" className="py-4 m-4 ">
+                      <UpdateStore id={store._id} />
+                    </td>
+                  </tr>
+                )}
+              </React.Fragment>
             ))}
+
             {stores.length === 0 && (
               <tr>
                 <td colSpan="6" className="py-4 text-center">

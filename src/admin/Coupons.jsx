@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaTrash, FaEdit } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom'; // ✅ STEP 1: Import here
+import { FaTrash, FaEdit } from 'react-icons/fa'; 
+import UpdateCoupon from "./Components/UpdateCoupon";
+
 
 const Coupons = () => {
   const [coupons, setCoupons] = useState([]);
-  const navigate = useNavigate(); // ✅ STEP 2: Initialize here
+  const [edit,setEdit]=useState(null)
 
   useEffect(() => {
     fetchCoupons();
@@ -60,6 +61,7 @@ const Coupons = () => {
           </thead>
           <tbody>
             {coupons.map((coupon) => (
+              <React.Fragment key={coupon._id}>
               <tr key={coupon._id} className="border-t border-gray-300">
                 <td className="p-3">{coupon.store?.name || 'N/A'}</td>
                 <td className="p-3">{coupon.category?.name || 'N/A'}</td>
@@ -78,15 +80,22 @@ const Coupons = () => {
                   <button onClick={() => handleDelete(coupon._id)} className="p-2 text-red-600">
                     <FaTrash />
                   </button>
-                  {/* ✅ STEP 3: Add navigate to edit page */}
                   <button
-                    onClick={() => navigate(`/admin/edit-coupon/${coupon._id}`)}
+                    onClick={()=>setEdit(edit==coupon._id?null:coupon._id)}
                     className="p-2 text-blue-600"
                   >
                     <FaEdit />
                   </button>
                 </td>
               </tr>
+              {edit == coupon._id && (
+                  <tr >
+                    <td colSpan="10" className="py-4 m-4 ">
+                      <UpdateCoupon initialData={coupon} />
+                    </td>
+                  </tr>
+                )}
+              </React.Fragment>
             ))}
           </tbody>
         </table>
