@@ -208,11 +208,12 @@ const AddCoupon = ({ stores, categories }) => {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
-    
-    
-    
   };
-  
+
+  // useEffect(()=>{
+  //   console.log(formData);
+    
+  // },[formData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -306,7 +307,7 @@ const AddCoupon = ({ stores, categories }) => {
             >
               <option value="">Select Category</option>
               {categories.map((category, index) => (
-                <option key={index} value={category.categoryId +" Ankit"}>
+                <option key={index} value={category.categoryId}>
                   {category.category}
                 </option>
               ))}
