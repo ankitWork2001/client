@@ -68,11 +68,7 @@ const Navbar = () => {
             <a href="#" className="hover:underline">
               Share &amp; Earn
             </a>
-            <div>
-            <Link to={"/admin/signup"}>SignUp</Link>
-            <span> / </span>
-            <Link to={"/admin/login"}>Login</Link>
-            </div>
+            
             
           </div>
         </div>
