@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import axios from "axios";
 import UpdateStore from "./Components/UpdateStore";
+import AdminNavbar from "./Components/AdminNavbar";
 
 const Stores = () => {
   const [stores, setStores] = useState([]);
@@ -49,6 +50,8 @@ const Stores = () => {
   if (loading) return <div className="p-4">Loading...</div>;
 
   return (
+    <>
+    <AdminNavbar/>
     <div className="p-4">
       <div className="text-3xl font-semibold mb-4">Top Stores</div>
       <button
@@ -124,6 +127,7 @@ const Stores = () => {
         </table>
       </div>
     </div>
+    </>
   );
 };
 

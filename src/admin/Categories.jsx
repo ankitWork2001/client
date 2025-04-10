@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import UpdateCategory from "./Components/UpdateCategory";
+import AdminNavbar from "./Components/AdminNavbar";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
@@ -47,6 +48,8 @@ const Categories = () => {
 
 
   return (
+    <>
+    <AdminNavbar/>
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Manage Categories</h1>
       <button
@@ -112,6 +115,7 @@ const Categories = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

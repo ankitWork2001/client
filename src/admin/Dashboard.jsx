@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaTags, FaStore, FaListAlt } from 'react-icons/fa';
+import AdminNavbar from './Components/AdminNavbar';
 
 const StatCard = ({ title, value, color, icon: Icon, onClick }) => (
   <div
@@ -53,6 +54,8 @@ const Dashboard = () => {
   }, []);
 
   return (
+    <>
+    <AdminNavbar/>
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -79,6 +82,8 @@ const Dashboard = () => {
         />
       </div>
     </div>
+    </>
+    
   );
 };
 

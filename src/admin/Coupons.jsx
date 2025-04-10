@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaTrash, FaEdit } from 'react-icons/fa'; 
 import UpdateCoupon from "./Components/UpdateCoupon";
+import AdminNavbar from './Components/AdminNavbar';
 
 
 const Coupons = () => {
@@ -47,6 +48,8 @@ const Coupons = () => {
   };
 
   return (
+    <>
+    <AdminNavbar/>
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">Coupons Management</h2>
       <button
@@ -115,6 +118,7 @@ const Coupons = () => {
         </table>
       </div>
     </div>
+    </>
   );
 };
 

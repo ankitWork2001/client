@@ -8,8 +8,10 @@ const Navbar = () => {
   return (
     <>
       {/* Top Nav: Search Bar */}
-      <div className="bg-white px-6 py-2 border-b">
-        <div className="max-w-2xl mx-auto flex">
+      <div className="flex justify-evenly items-center gap-6 mx-2">
+      
+      <div className="bg-white w-full px-6 py-2 border-b">
+        <div className="max-w-5xl mx-auto flex">
           <input
             type="text"
             placeholder="Search for deals, stores, etc."
@@ -19,6 +21,11 @@ const Navbar = () => {
             Search
           </button>
         </div>
+      </div>
+      <Link to={"/admin/login"}>
+      <button className="bg-blue-500 text-white cursor-pointer px-4 py-2 rounded-md hover:bg-blue-600">Login</button>
+      </Link>
+      
       </div>
 
       {/* Bottom Nav: Logo + Links */}
