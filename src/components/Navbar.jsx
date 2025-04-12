@@ -59,12 +59,9 @@ const Navbar = () => {
               Top Stores
             </Link>
 
-            <a href="#" className="hover:underline">
-              Best Offers
-            </a>
-            <a href="#" className="hover:underline">
-              Collections
-            </a>
+            <Link to="/dealofday" className="hover:underline">
+              Deals of the Day
+            </Link>
             <a href="#" className="hover:underline">
               Share &amp; Earn
             </a>

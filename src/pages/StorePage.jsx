@@ -80,20 +80,7 @@ const StorePage = () => {
           </h1>
         )}
 
-        <div className="flex m-2 ml-[25vw] ">
-          <button className="border-2 border-black p-4 text-2xl text-blue-500 rounded-lg w-[15vw] hover:cursor-pointer">
-            Popular
-          </button>
-          <button className="border-2 border-black p-4 text-2xl text-blue-500 rounded-lg w-[15vw] hover:cursor-pointer">
-            Discount
-          </button>
-          <button className="border-2 border-black p-4 text-2xl text-blue-500 rounded-lg w-[15vw] hover:cursor-pointer">
-            High Price
-          </button>
-          <button className="border-2 border-black p-4 text-2xl text-blue-500 rounded-lg w-[15vw] hover:cursor-pointer">
-            Low Price
-          </button>
-        </div>
+     
 
         <div className="flex">
           <div className="w-[23vw]">
