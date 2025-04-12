@@ -11,7 +11,7 @@ const DealOfDaySection = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: "http://localhost:3000/api/coupons/",
+      url: `${import.meta.env.VITE_APP_BACKEND}api/coupons/`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `${import.meta.env.VITE_APP_TOKEN}`,

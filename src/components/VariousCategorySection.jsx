@@ -9,7 +9,7 @@ const VariousCategorySection = () => {
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://localhost:3000/api/coupons',
+            url: `${import.meta.env.VITE_APP_BACKEND}api/coupons`,
             headers: { 
               'Authorization':import.meta.env.VITE_APP_TOKEN,
             }
@@ -40,7 +40,7 @@ const VariousCategorySection = () => {
     },[])
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-        {categories && categories.map((item) => (
+        {categories && categories?.map((item) => (
             <IndividualCategorySection key={item.category} coupons={item.coupons} name={item.category} />
         ))}
     </div>

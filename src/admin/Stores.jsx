@@ -12,7 +12,7 @@ const Stores = () => {
 
   const fetchStores = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/api/stores", {
+      const { data } = await axios.get(`${import.meta.env.VITE_APP_BACKEND}api/stores`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
@@ -32,7 +32,7 @@ const Stores = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:3000/api/stores/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_APP_BACKEND}api/stores/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`, 
         },
@@ -163,7 +163,7 @@ const AddStore = () => {
       formDataToSend.append("totalCoupons", formData.totalCoupons || 0);
 
       const res = await axios.post(
-        "http://localhost:3000/api/stores/",
+        `${import.meta.env.VITE_APP_BACKEND}api/stores/`,
         formDataToSend,
         {
           headers: {

@@ -16,7 +16,7 @@ const UpdateCoupon = ({ initialData }) => {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:3000/api/coupons/${initialData._id}`,
+        `${import.meta.env.VITE_APP_BACKEND}api/coupons/${initialData._id}`,
         formData,
         {
           headers: {

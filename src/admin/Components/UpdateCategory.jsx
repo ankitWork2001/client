@@ -24,7 +24,7 @@ const UpdateCategory = ({ id }) => {
       formData.append("totalCoupons", data.totalCoupons);
 
       let response = await axios.put(
-      `http://localhost:3000/api/categories/${id}`,
+      `${import.meta.env.VITE_APP_BACKEND}api/categories/${id}`,
       formData,
       {
         headers: {

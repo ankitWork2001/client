@@ -10,7 +10,7 @@ const CategoriesSection = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: "http://localhost:3000/api/categories/",
+      url: `${import.meta.env.VITE_APP_BACKEND}api/categories/`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `${import.meta.env.VITE_APP_TOKEN}`,

@@ -20,7 +20,7 @@ const CategoryPage = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: "http://localhost:3000/api/coupons",
+      url: `${import.meta.env.VITE_APP_BACKEND}api/coupons`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `${import.meta.env.VITE_APP_TOKEN}`,
@@ -47,7 +47,7 @@ const CategoryPage = () => {
   }, []);
   const fetchCategoryData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/categories`, {
+      const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND}api/categories`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${import.meta.env.VITE_APP_TOKEN}`,

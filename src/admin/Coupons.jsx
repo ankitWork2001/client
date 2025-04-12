@@ -20,17 +20,17 @@ const Coupons = () => {
   const fetchCoupons = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:3000/api/coupons", {
+      const res = await axios.get(`${import.meta.env.VITE_APP_BACKEND}api/coupons`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
       });
-      const storedata = await axios.get("http://localhost:3000/api/stores", {
+      const storedata = await axios.get(`${import.meta.env.VITE_APP_BACKEND}api/stores`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
       });
-      const categoriedata = await axios.get("http://localhost:3000/api/categories", {
+      const categoriedata = await axios.get(`${import.meta.env.VITE_APP_BACKEND}api/categories`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
@@ -65,7 +65,7 @@ const Coupons = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this coupon?")) {
       try {
-        await axios.delete(`http://localhost:3000/api/coupons/${id}`, {
+        await axios.delete(`${import.meta.env.VITE_APP_BACKEND}api/coupons/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
           },
@@ -227,7 +227,7 @@ const AddCoupon = ({ stores, categories }) => {
     };
 
     try {
-      await axios.post("http://localhost:3000/api/coupons", payload, {
+      await axios.post(`${import.meta.env.VITE_APP_BACKEND}api/coupons`, payload, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
           "Content-Type": "application/json",

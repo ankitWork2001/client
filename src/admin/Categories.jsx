@@ -14,7 +14,7 @@ const Categories = () => {
   const fetchCategories = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:3000/api/categories", {
+      const res = await axios.get(`${import.meta.env.VITE_APP_BACKEND}api/categories`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
@@ -34,7 +34,7 @@ const Categories = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this category?")) return;
     try {
-      await axios.delete(`http://localhost:3000/api/categories/${id}`,{
+      await axios.delete(`${import.meta.env.VITE_APP_BACKEND}api/categories/${id}`,{
         headers:{
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         }
@@ -146,7 +146,7 @@ const AddCategory = () => {
     );
 
     try {
-      const res = await axios.post("http://localhost:3000/api/categories/", data, {
+      const res = await axios.post(`${import.meta.env.VITE_APP_BACKEND}api/categories/`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization:`Bearer ${localStorage.getItem("adminToken")}`

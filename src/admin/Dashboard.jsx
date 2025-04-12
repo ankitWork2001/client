@@ -29,13 +29,13 @@ const Dashboard = () => {
     const fetchStats = async () => {
       try {
         const [couponsRes, storesRes, categoriesRes] = await Promise.all([
-          axios.get('http://localhost:3000/api/coupons', {
+          axios.get(`${import.meta.env.VITE_APP_BACKEND}api/coupons`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
           }),
-          axios.get('http://localhost:3000/api/stores', {
+          axios.get(`${import.meta.env.VITE_APP_BACKEND}api/stores`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
           }),
-          axios.get('http://localhost:3000/api/categories', {
+          axios.get(`${import.meta.env.VITE_APP_BACKEND}api/categories`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
           }),
         ]);

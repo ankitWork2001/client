@@ -23,7 +23,7 @@ const UpdateStore = ({ id }) => {
 
     try {
       let response = await axios.put(
-      `http://localhost:3000/api/stores/${id}`,
+      `${import.meta.env.VITE_APP_BACKEND}api/stores/${id}`,
       formData,
       {
         headers: {
