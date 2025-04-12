@@ -1,36 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCategoryId, setCategoryName } from "../redux/categorySlice";
 import { resetStore } from "../redux/storeSlice";
 import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react"; // Optional icons (or use emoji/icons if preferred)
+
 const Navbar = () => {
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       {/* Top Nav: Search Bar */}
-      <div className="flex justify-evenly items-center gap-6 mx-2">
-      
-      <div className="bg-white w-full px-6 py-2 border-b">
-        <div className="max-w-5xl mx-auto flex">
-          <input
-            type="text"
-            placeholder="Search for deals, stores, etc."
-            className="w-full border border-gray-300 rounded-l-md px-4 py-2 text-black focus:outline-none"
-          />
-          <button className="bg-orange-500 text-white px-4 py-2 rounded-r-md hover:bg-orange-600">
-            Search
-          </button>
+      <div className="flex flex-col sm:flex-row justify-evenly items-center gap-4 sm:gap-6 mx-2">
+        <div className="bg-white w-full px-6 py-2 border-b sm:border-none">
+          <div className="max-w-5xl mx-auto flex">
+            <input
+              type="text"
+              placeholder="Search for deals, stores, etc."
+              className="w-full border border-gray-300 rounded-l-md px-4 py-2 text-black focus:outline-none"
+            />
+            <button className="bg-orange-500 text-white px-4 py-2 rounded-r-md hover:bg-orange-600">
+              Search
+            </button>
+          </div>
         </div>
-      </div>
-      <Link to={"/admin/login"}>
-      <button className="bg-blue-500 text-white cursor-pointer px-4 py-2 rounded-md hover:bg-blue-600">Login</button>
-      </Link>
-      
+        <Link to={"/admin/login"}>
+          <button className="bg-blue-500 text-white mb-2 mt-2 cursor-pointer px-4 py-2 rounded-md hover:bg-blue-600">
+            Login
+          </button>
+        </Link>
       </div>
 
       {/* Bottom Nav: Logo + Links */}
-      <nav className="bg-blue-600 text-white px-6 py-3 ">
-        <div className="max-w-7xl mx-30 flex justify-between  items-center">
+      <nav className="bg-blue-600 text-white px-6 py-3 relative">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo */}
           <Link to="/">
             <div className="flex items-center space-x-2">
@@ -44,31 +48,77 @@ const Navbar = () => {
             </div>
           </Link>
 
+          {/* Hamburger Button */}
+          <div className="sm:hidden">
+            <button onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
           {/* Nav Links */}
-          <div className="flex space-x-20 mx-30 text-lg">
-            <Link to="/category" className="hover:underline" onClick={()=>{
-              dispatch(setCategoryId(null));
-              dispatch(setCategoryName('All Categories'));
-            }}>
+          <div className="hidden sm:flex space-x-20 mx-30 text-lg">
+            <Link
+              to="/category"
+              className="hover:underline"
+              onClick={() => {
+                dispatch(setCategoryId(null));
+                dispatch(setCategoryName("All Categories"));
+              }}
+            >
               Categories
             </Link>
-            <Link to="/store" className="hover:underline" onClick={()=>{
-              dispatch(resetStore());
-             
-            }}>
+            <Link
+              to="/store"
+              className="hover:underline"
+              onClick={() => dispatch(resetStore())}
+            >
               Top Stores
             </Link>
-
             <Link to="/dealofday" className="hover:underline">
               Deals of the Day
             </Link>
             <a href="#" className="hover:underline">
               Share &amp; Earn
             </a>
-            
-            
           </div>
         </div>
+
+        {/* Mobile Nav Links */}
+        {isOpen && (
+          <div className="flex flex-col sm:hidden mt-4 space-y-4 text-lg px-4">
+            <Link
+              to="/category"
+              className="hover:underline"
+              onClick={() => {
+                dispatch(setCategoryId(null));
+                dispatch(setCategoryName("All Categories"));
+                setIsOpen(false);
+              }}
+            >
+              Categories
+            </Link>
+            <Link
+              to="/store"
+              className="hover:underline"
+              onClick={() => {
+                dispatch(resetStore());
+                setIsOpen(false);
+              }}
+            >
+              Top Stores
+            </Link>
+            <Link
+              to="/dealofday"
+              className="hover:underline"
+              onClick={() => setIsOpen(false)}
+            >
+              Deals of the Day
+            </Link>
+            <a href="#" className="hover:underline" onClick={() => setIsOpen(false)}>
+              Share &amp; Earn
+            </a>
+          </div>
+        )}
       </nav>
     </>
   );
