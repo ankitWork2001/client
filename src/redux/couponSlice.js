@@ -2,44 +2,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  coupons: [],
-  loading: false,
-  error: null,
-};
+  couponId:"67fa20572e5d38b2c8450f74",
+}
 
 const couponSlice = createSlice({
-  name: 'coupons',
+  name: 'coupon',
   initialState,
   reducers: {
-    setCoupons: (state, action) => {
-      state.coupons = action.payload;
+    setCouponId: (state, action) => {
+      state.couponId = action.payload;
     },
-    addCoupon: (state, action) => {
-      state.coupons.unshift(action.payload); // newest on top
-    },
-    updateCoupon: (state, action) => {
-      const index = state.coupons.findIndex(c => c._id === action.payload._id);
-      if (index !== -1) state.coupons[index] = action.payload;
-    },
-    deleteCoupon: (state, action) => {
-      state.coupons = state.coupons.filter(c => c._id !== action.payload);
-    },
-    setCouponLoading: (state, action) => {
-      state.loading = action.payload;
-    },
-    setCouponError: (state, action) => {
-      state.error = action.payload;
+    clearCouponId: (state) => {
+      state.couponId = null;
     },
   },
 });
 
-export const {
-  setCoupons,
-  addCoupon,
-  updateCoupon,
-  deleteCoupon,
-  setCouponLoading,
-  setCouponError,
-} = couponSlice.actions;
-
+export const { setCouponId, clearCouponId } = couponSlice.actions;
 export default couponSlice.reducer;
+

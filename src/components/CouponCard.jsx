@@ -1,6 +1,14 @@
 import React from 'react';
-
-const CouponCard = ({companylogo,image,minPurchase,description}) => {
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setCouponId } from '../redux/couponSlice';
+const CouponCard = ({companylogo,image,minPurchase,description,id}) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleClick = () => {
+    dispatch(setCouponId(id));
+    navigate("/coupon");
+  }
   return (
     <>
     <div className='flex flex-col  bg-gray-100 m-4 p-3 w-max rounded-lg h-[40vh]'>
@@ -20,7 +28,7 @@ const CouponCard = ({companylogo,image,minPurchase,description}) => {
         <p className='font-bold'>
           Read More...
         </p>
-        <button className='btn border-2 border-transparent bg-white text-blue-500 p-2 rounded-lg hover:cursor-pointer  font-semibold'>
+        <button onClick={handleClick} className='btn border-2 border-transparent bg-white text-blue-500 p-2 rounded-lg hover:cursor-pointer  font-semibold'>
           Grab Deal
         </button>
       </div>

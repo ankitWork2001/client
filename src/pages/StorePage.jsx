@@ -146,6 +146,7 @@ const StorePage = () => {
                   image={macbook || value?.category?.image}
                   minPurchase={value.minimumPurchaseAmount}
                   description={value.description}
+                  id={value._id}
                 />
               );
             })}

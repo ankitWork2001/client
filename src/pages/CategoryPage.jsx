@@ -145,6 +145,7 @@ const CategoryPage = () => {
                   image={value?.category?.image}
                   minPurchase={value.minimumPurchaseAmount}
                   description={value.description}
+                  id={value._id}
                 />
               );
             })}

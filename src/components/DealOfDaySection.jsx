@@ -44,6 +44,7 @@ const DealOfDaySection = () => {
             image={macbook}
             minPurchase={value.minimumPurchaseAmount}
             description={value.description}
+            id={value._id}
           />
         );
       })}

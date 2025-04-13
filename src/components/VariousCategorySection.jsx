@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import {useDispatch } from 'react-redux'
 import { setCategoryId,setCategoryName } from '../redux/categorySlice'
+import { setCouponId } from '../redux/couponSlice'
 const VariousCategorySection = () => {
     const [categories, setCategories] = React.useState()
     useEffect(()=>{
@@ -67,14 +68,20 @@ const IndividualCategorySection = ({coupons,name}) => {
             </div>
             <div className="flex flex-wrap gap-20 p-5 rounded-lg" style={{ background: 'linear-gradient(to top, #1E3A8A, #BFDBFE)' }}>
                 {coupons.slice(0, 3).map((coupon) => (
-                    <CouponCategoryCard key={coupon.id} logo={coupon.store.logo} brand={coupon.store.name} desc={coupon.description} />
+                    <CouponCategoryCard key={coupon._id} id={coupon._id} logo={coupon.store.logo} brand={coupon.store.name} desc={coupon.description} />
                 ))}
             </div>
         </div>
     )
 }
 
-const CouponCategoryCard=({logo,brand,desc})=>{
+const CouponCategoryCard=({logo,brand,desc,id})=>{
+    const dispatch = useDispatch();
+      const navigate = useNavigate();
+      const handleClick = () => {
+        dispatch(setCouponId(id));
+        navigate("/coupon");
+      }
     return (
         <div className="w-70 border border-gray-200 rounded-lg shadow-md transition-shadow duration-300 p-4 flex flex-col items-center">
             <div className="w-26 h-26 mb-4 flex items-center justify-center">
@@ -82,7 +89,7 @@ const CouponCategoryCard=({logo,brand,desc})=>{
             </div>
             <h3 className="font-bold text-lg text-gray-800 mb-2 text-center">{brand}</h3>
             <p className="text-gray-100 text-center text-sm">{desc}</p>
-            <button className="mt-4 bg-orange-400 text-white px-4 py-2 rounded transition-colors duration-300 cursor-pointer">Get Deal</button>
+            <button onClick={handleClick} className="mt-4 bg-orange-400 text-white px-4 py-2 rounded transition-colors duration-300 cursor-pointer">Get Deal</button>
         </div>
     )
 
