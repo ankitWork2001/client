@@ -20,7 +20,7 @@ const StorePage = () => {
       url: `${import.meta.env.VITE_APP_BACKEND}api/coupons`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${import.meta.env.VITE_APP_TOKEN}`,
+        
       },
     };
     async function makeRequest() {
@@ -61,7 +61,7 @@ const StorePage = () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND}api/stores`, {
         headers: {
-          Authorization: `${import.meta.env.VITE_APP_TOKEN}`,
+          "Content-Type": "application/json",
         },
       });
       setStoreData(response.data.stores);

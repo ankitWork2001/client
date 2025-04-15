@@ -15,7 +15,7 @@ const DealOfDaySection = () => {
       url: `${import.meta.env.VITE_APP_BACKEND}api/coupons/`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${import.meta.env.VITE_APP_TOKEN}`,
+        
       },
     };
     async function makeRequest() {

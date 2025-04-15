@@ -23,7 +23,7 @@ const CategoryPage = () => {
       url: `${import.meta.env.VITE_APP_BACKEND}api/coupons`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${import.meta.env.VITE_APP_TOKEN}`,
+        
       },
     };
     async function makeRequest() {
@@ -50,7 +50,6 @@ const CategoryPage = () => {
       const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND}api/categories`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `${import.meta.env.VITE_APP_TOKEN}`,
         },
       });
       setCategoryData(response.data.categories);

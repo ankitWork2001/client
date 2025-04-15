@@ -13,7 +13,7 @@ const CategoriesSection = () => {
       url: `${import.meta.env.VITE_APP_BACKEND}api/categories/`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${import.meta.env.VITE_APP_TOKEN}`,
+        
       },
     };
     async function makeRequest() {

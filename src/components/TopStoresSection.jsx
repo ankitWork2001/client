@@ -12,9 +12,6 @@ const TopStoresSection = () => {
             method: 'get',
             maxBodyLength: Infinity,
             url: `${import.meta.env.VITE_APP_BACKEND}api/stores`,
-            headers: { 
-              'Authorization':import.meta.env.VITE_APP_TOKEN,
-            }
           };
           
           async function makeRequest() {
