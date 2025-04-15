@@ -137,7 +137,7 @@ const StorePage = () => {
               </form>
             </div>
           </div>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap gap-3">
             {store?.map((value, index) => {
               return (
                 <CouponCard
@@ -147,6 +147,7 @@ const StorePage = () => {
                   minPurchase={value.minimumPurchaseAmount}
                   description={value.description}
                   id={value._id}
+                  code={value.couponCode}
                 />
               );
             })}

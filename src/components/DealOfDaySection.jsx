@@ -6,6 +6,7 @@ import macbook from "../../assets/dealoftheday_image.jpg";
 import CouponCard from "./CouponCard";
 const DealOfDaySection = () => {
   const [couponDetails, setCouponDetails] = useState();
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     let config = {
@@ -18,14 +19,20 @@ const DealOfDaySection = () => {
       },
     };
     async function makeRequest() {
-      let response = await axios.request(config);
-      // console.log(response.data);
-      let data = response.data;
-      setCouponDetails(
-        data.filter((value) => {
-          return value.featured;
-        })
-      );
+      try { // Add try...catch for error handling
+        let response = await axios.request(config);
+        let data = response.data;
+        setCouponDetails(
+          data.filter((value) => {
+            return value.featured;
+          })
+        );
+      } catch (error) {
+        console.error("Failed to fetch coupons:", error);
+        setCouponDetails([]); // Set to empty array on error to avoid issues
+      } finally {
+        setLoading(false); // Set loading to false after fetch attempt
+      }
     }
 
     makeRequest();
@@ -33,21 +40,30 @@ const DealOfDaySection = () => {
 
   return (
     <>
-    <div className="m-auto mt-5 bg-white w-[90vw] rounded-lg">
+    <div className="m-auto mt-5 bg-white w-[90vw] rounded-lg p-4"> {/* Added padding */}
       <h1 className="text-4xl m-4" > Deals Of The Day</h1>
-      <div className="flex flex-wrap gap-x-10">
-      {couponDetails?.map((value, index) => {
-        return (
-          <CouponCard
-            key={index}
-            companylogo={value?.store?.logo}
-            image={macbook}
-            minPurchase={value.minimumPurchaseAmount}
-            description={value.description}
-            id={value._id}
-          />
-        );
-      })}
+      <div className="flex flex-wrap gap-x-10 justify-center"> {/* Added justify-center */}
+      {loading ? (
+          <p className="text-center w-full text-gray-500">Loading deals...</p> // Show loading indicator
+        ) : couponDetails && couponDetails.length > 0 ? (
+          couponDetails.map((value) => { // Use value._id for key if available and unique
+            return (
+              <CouponCard
+                key={value._id || index} // Prefer unique ID from data if possible
+                companylogo={value?.store?.logo}
+                image={macbook}
+                minPurchase={value.minimumPurchaseAmount}
+                description={value.description}
+                id={value._id}
+                code={value.couponCode}
+              />
+            );
+          })
+        ) : (
+          <p className="text-center w-full text-gray-500 p-4">
+            No featured Deals of the Day available right now. Check back soon!
+          </p> // Message when no deals are found
+        )}
       </div>
       </div>
     </>

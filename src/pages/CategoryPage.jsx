@@ -136,7 +136,7 @@ const CategoryPage = () => {
               </form>
             </div>
           </div>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap gap-3">
             {category?.map((value, index) => {
               return (
                 <CouponCard
@@ -146,6 +146,7 @@ const CategoryPage = () => {
                   minPurchase={value.minimumPurchaseAmount}
                   description={value.description}
                   id={value._id}
+                  code={value.couponCode}
                 />
               );
             })}

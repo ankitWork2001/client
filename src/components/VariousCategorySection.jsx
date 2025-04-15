@@ -88,7 +88,7 @@ const CouponCategoryCard=({logo,brand,desc,id})=>{
                 <img src={logo} alt={brand} className="max-w-full max-h-full object-contain mix-blend-multiply" />
             </div>
             <h3 className="font-bold text-lg text-gray-800 mb-2 text-center">{brand}</h3>
-            <p className="text-gray-100 text-center text-sm">{desc}</p>
+            <p className="text-gray-100 text-center text-sm">{desc ? (desc.length > 100 ? `${desc.slice(0, 100)}...` : desc) : 'Versatile, durable, and thoughtfully made to suit your needs with quality you can trust daily.'}</p>
             <button onClick={handleClick} className="mt-4 bg-orange-400 text-white px-4 py-2 rounded transition-colors duration-300 cursor-pointer">Get Deal</button>
         </div>
     )

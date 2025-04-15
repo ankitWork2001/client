@@ -14,7 +14,7 @@ const CouponPage = () => {
         let config = {
             method: "get",
             maxBodyLength: Infinity,
-            url: `${import.meta.env.VITE_APP_BACKEND}api/coupons/${couponId}`, // Use dynamic ID from Redux store
+            url: `${import.meta.env.VITE_APP_BACKEND}api/coupons/${couponId}`, 
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `${import.meta.env.VITE_APP_TOKEN}`,
