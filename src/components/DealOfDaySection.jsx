@@ -51,7 +51,7 @@ const DealOfDaySection = () => {
               <CouponCard
                 key={value._id || index} // Prefer unique ID from data if possible
                 companylogo={value?.store?.logo}
-                image={macbook}
+                image={value?.category?.image || macbook}
                 minPurchase={value.minimumPurchaseAmount}
                 description={value.description}
                 id={value._id}

@@ -13,7 +13,7 @@ const StoreCard = ({logo,name,totalCoupons,id}) => {
     navigate(`/store`);
   };
   return (
-    <div className='bg-amber-50 flex flex-col justify-center items-center border-3 rounded-lg border-yellow-500 min-w-[20vw] min-h-[15vw] gap-2 p-5 cursor-pointer'
+    <div className='bg-amber-50 flex flex-col justify-center items-center border-3 rounded-lg border-yellow-500 gap-2 p-3 sm:p-4 md:p-5 cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out'
     onClick={handleClick}
     >
 

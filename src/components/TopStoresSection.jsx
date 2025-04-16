@@ -38,10 +38,14 @@ const TopStoresSection = () => {
             <button className=' text-orange-300 text-2xl rounded cursor-pointer' >Visit All Stores</button>
             </Link>
         </div>
-        <div className='flex flex-wrap gap-x-8 gap-y-8 justify-center items-center bg-amber-200 p-10 rounded-lg'>
-            {stores?.map((value,index)=>{
+        {/* The main flex container */}
+        <div className='flex flex-wrap gap-x-8 gap-y-8 justify-center items-center bg-amber-200 p-3 md:p-10 rounded-lg'>
+            {stores?.map((value)=>{ 
                 return (
-                    <StoreCard key={index} logo={value.logo} name={value.name} totalCoupons={value.totalCoupons} id={value._id} />
+                    
+                    <div key={value._id} className="w-[calc(50%-1rem)] sm:w-auto"> 
+                        <StoreCard logo={value.logo} name={value.name} totalCoupons={value.totalCoupons} id={value._id} />
+                    </div>
                 )
             })}
         </div>
