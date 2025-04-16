@@ -145,7 +145,7 @@ const StorePage = () => {
               <CouponCard
                 key={index}
                 companylogo={value?.store?.logo}
-                image={macbook || value?.category?.image}
+                image={value?.category?.image || macbook }
                 minPurchase={value.minimumPurchaseAmount}
                 description={value.description}
                 id={value._id}

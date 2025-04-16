@@ -55,7 +55,7 @@ const Footer = () => {
           <h4 className="font-semibold mb-2">Customer Support</h4>
           <ul className="space-y-1">
             <li><a href="#">Live Chat Support</a></li>
-            <li>Email: support@yourcouponwebsite.com</li>
+            <li className='wrap-anywhere'>Email: support@yourcouponwebsite.com</li>
             <li>Phone: +91 XXXXX XXXXX</li>
           </ul>
         </div>
