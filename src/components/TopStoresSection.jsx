@@ -16,11 +16,12 @@ const TopStoresSection = () => {
           
           async function makeRequest() {
             try {
-                const response = await axios.request(config);
-            //   console.log(JSON.stringify(response.data));
-                setStores(response.data.stores);
-                
-
+              const response = await axios.request(config);
+              // Sort stores by createdAt date (ascending order - oldest first)
+              const sortedStores = response.data.stores.sort((a, b) => {
+                return new Date(a.createdAt) - new Date(b.createdAt);
+              });
+              setStores(sortedStores);
             }
             catch (error) {
               console.log(error);
