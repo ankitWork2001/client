@@ -26,7 +26,7 @@ const Navbar = () => {
           </div>
         </div>
         <Link to={"/admin/login"}>
-          <button className="bg-blue-500 text-white mb-2 mt-2 cursor-pointer px-4 py-2 rounded-md hover:bg-blue-600">
+          <button className="bg-blue-500 text-white mb-2 mt-2 cursor-pointer px-4 py-2 rounded-md hover:bg-blue-600 hidden md:block">
             Login
           </button>
         </Link>
@@ -117,6 +117,13 @@ const Navbar = () => {
             <a href="#" className="hover:underline" onClick={() => setIsOpen(false)}>
               Share &amp; Earn
             </a>
+            <Link
+              to="/admin/login"
+              className="hover:underline"
+              onClick={() => setIsOpen(false)}
+            >
+              Login
+            </Link>
           </div>
         )}
       </nav>

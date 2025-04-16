@@ -38,7 +38,7 @@ const VariousCategorySection = () => {
           makeRequest();
     },[])
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="w-[90vw] m-auto mt-5">
         {categories && categories?.map((item) => (
             <IndividualCategorySection key={item.category} coupons={item.coupons} name={item.category} />
         ))}
@@ -51,7 +51,7 @@ const IndividualCategorySection = ({coupons,name}) => {
     const navigate = useNavigate();
     const handleClick = () => {
 
-        console.log(`Viewing more coupons for ${name} ${coupons[0].category._id}`);
+        // console.log(`Viewing more coupons for ${name} ${coupons[0].category._id}`);
         dispatch(setCategoryId(coupons[0].category._id))
         dispatch(setCategoryName(name))
         navigate(`/category`);
@@ -64,7 +64,7 @@ const IndividualCategorySection = ({coupons,name}) => {
                 <h2 className="text-2xl font-bold mb-6 pb-2 border-b-2 border-blue-500 inline-block">{name}</h2>
                 <button onClick={handleClick} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded transition-colors duration-300 cursor-pointer">View More</button>
             </div>
-            <div className="flex flex-wrap gap-20 p-5 rounded-lg" style={{ background: 'linear-gradient(to top, #1E3A8A, #BFDBFE)' }}>
+            <div className="flex flex-wrap gap-20 p-5 rounded-lg justify-evenly" style={{ background: 'linear-gradient(to top, #1E3A8A, #BFDBFE)' }}>
                 {coupons.slice(0, 3).map((coupon) => (
                     <CouponCategoryCard key={coupon._id} id={coupon._id} logo={coupon.store.logo} brand={coupon.store.name} desc={coupon.description} />
                 ))}

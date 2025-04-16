@@ -40,7 +40,7 @@ const DealOfDaySection = () => {
 
   return (
     <>
-    <div className="m-auto mt-5 w-[90vw]"> {/* Added padding */}
+    <div className="m-auto my-5 w-[90vw]"> {/* Added padding */}
       <h1 className="text-4xl mb-4" > Deals Of The Day</h1>
       <div className="flex flex-wrap gap-10 justify-center"> {/* Added justify-center */}
       {loading ? (

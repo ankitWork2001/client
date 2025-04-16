@@ -67,7 +67,7 @@ const HeroBanner = () => {
   }, [currentIndex]);
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto mt-6 overflow-hidden">
+    <div className="relative w-[90vw] mx-auto mt-6 overflow-hidden">
       <div
         ref={sliderRef}
         className={`flex ${transition ? 'transition-transform duration-500 ease-in-out' : ''}`}
