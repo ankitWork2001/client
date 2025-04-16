@@ -21,7 +21,18 @@ const extendedImages = [
 const HeroBanner = () => {
   const [currentIndex, setCurrentIndex] = useState(1); // Start from the first actual image
   const [transition, setTransition] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   const sliderRef = useRef(null);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const prevSlide = () => {
     setCurrentIndex((prev) => prev - 1);
@@ -71,14 +82,14 @@ const HeroBanner = () => {
       <div
         ref={sliderRef}
         className={`flex ${transition ? 'transition-transform duration-500 ease-in-out' : ''}`}
-        style={{ transform: `translateX(-${currentIndex * 50}%)` }}
+        style={{ transform: `translateX(-${currentIndex * (isMobile ? 100 : 50)}%)` }}
       >
         {extendedImages.map((img, idx) => (
-          <div key={idx} className="min-w-[50%] px-2">
+          <div key={idx} className="min-w-full sm:min-w-[50%] px-2">
             <img
               src={img.src}
               alt={img.alt}
-              className="w-full h-[300px] object-cover rounded-lg shadow-md"
+              className="w-full h-[200px] sm:h-[300px] object-cover rounded-lg shadow-md"
             />
           </div>
         ))}
