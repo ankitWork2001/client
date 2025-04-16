@@ -40,9 +40,9 @@ const DealOfDaySection = () => {
 
   return (
     <>
-    <div className="m-auto mt-5 bg-white w-[90vw] rounded-lg p-4"> {/* Added padding */}
-      <h1 className="text-4xl m-4" > Deals Of The Day</h1>
-      <div className="flex flex-wrap gap-x-10 justify-center"> {/* Added justify-center */}
+    <div className="m-auto mt-5 w-[90vw]"> {/* Added padding */}
+      <h1 className="text-4xl mb-4" > Deals Of The Day</h1>
+      <div className="flex flex-wrap gap-10 justify-center"> {/* Added justify-center */}
       {loading ? (
           <p className="text-center w-full text-gray-500">Loading deals...</p> // Show loading indicator
         ) : couponDetails && couponDetails.length > 0 ? (

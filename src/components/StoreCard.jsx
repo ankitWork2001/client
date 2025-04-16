@@ -6,7 +6,7 @@ const StoreCard = ({logo,name,totalCoupons,id}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = () => {
-    console.log(`Clicked on ${name}`);
+    // console.log(`Clicked on ${name}`);
     dispatch(setStoreId(id));
     dispatch(setStoreName(name));
 
@@ -20,7 +20,7 @@ const StoreCard = ({logo,name,totalCoupons,id}) => {
       <img 
         src={logo} 
         alt={`${name} logo`} 
-        className="mix-blend-multiply object-contain h-24 w-auto"
+        className="mix-blend-multiply object-contain h-24 w-34"
       />
       <h2 className='text-xl font-semibold'>{name}</h2>
       
