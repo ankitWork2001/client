@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   FaInstagram,
   FaFacebookF,
@@ -17,9 +18,9 @@ const Footer = () => {
         <div>
           <h4 className="font-semibold mb-2">Quick Links</h4>
           <ul className="space-y-1">
-            <li><a href="#">About Us</a></li>
+            <li><Link to="/aboutus">About Us</Link></li>
             <li><a href="#">How It Works</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li><Link to="/contactus">Contact Us</Link></li>
             <li><a href="#">FAQs</a></li>
             <li><a href="#">Blog</a></li>
           </ul>
@@ -38,19 +39,19 @@ const Footer = () => {
         </div>
 
         {/* Top Brands */}
-        <div>
-          <h4 className="font-semibold mb-2">Top Brands</h4>
-          <ul className="space-y-1">
-            <li><a href="#">Amazon</a></li>
-            <li><a href="#">Flipkart</a></li>
-            <li><a href="#">Myntra</a></li>
-            <li><a href="#">Airbnb</a></li>
-            <li><a href="#">Zomato</a></li>
-            <li><a href="#">Swiggy</a></li>
-          </ul>
-        </div>
+          <div>
+            <h4 className="font-semibold mb-2">Top Brands</h4>
+            <ul className="space-y-1">
+              <li><Link to="/store">Amazon</Link></li>
+              <li><Link to="/store">Flipkart</Link></li>
+              <li><Link to="/store">Myntra</Link></li>
+              <li><Link to="/store">Airbnb</Link></li>
+              <li><Link to="/store">Puma</Link></li>
+              <li><Link to="/store">Rolex</Link></li>
+            </ul>
+          </div>
 
-        {/* Customer Support */}
+          {/* Customer Support */}
         <div>
           <h4 className="font-semibold mb-2">Customer Support</h4>
           <ul className="space-y-1">
