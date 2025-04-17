@@ -13,6 +13,8 @@ import AdminStores from "./admin/Stores"
 import AdminCoupons from "./admin/Coupons"
 import DealOfDay from "./components/DealOfDaySection";
 import CouponPage from "./pages/CouponPage";
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
 
 const Layout = () => (
   <>
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
       {
         path:"/coupon",
         element:<CouponPage/>
+      },
+      {
+        path:"/aboutus",
+        element:<AboutUs/>
+      },
+      {
+        path:"/contactus",
+        element:<ContactUs/>
       }
     ],
   },
