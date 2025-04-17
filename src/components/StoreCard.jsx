@@ -24,7 +24,14 @@ const StoreCard = ({logo,name,totalCoupons,id}) => {
       />
       <h2 className='text-xl font-semibold'>{name}</h2>
       
-      <button className='border-1 px-4 py-2 rounded bg-white text-orange-400'> Upto {totalCoupons} % </button>
+      <button className='border-1 px-2 md:px-4 py-2 rounded bg-white text-orange-400 flex gap-x-1 flex-wrap justify-center'>
+        <div>
+         Upto 
+        </div>
+        <div>
+         {totalCoupons} % 
+        </div>
+      </button>
 
     </div>
   )
