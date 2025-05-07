@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { setCategoryId, setCategoryName } from "../redux/categorySlice";
 import { resetStore } from "../redux/storeSlice";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react"; // Optional icons (or use emoji/icons if preferred)
+import { Menu, X } from "lucide-react";
+import Logo from "../../assets/Logo.jpg"; // Your imported logo
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -25,41 +26,30 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-        <Link to={"/admin/login"}>
-          <button className="bg-blue-500 text-white mb-2 mt-2 cursor-pointer px-4 py-2 rounded-md hover:bg-blue-600 hidden md:block">
-            Login
-          </button>
-        </Link>
       </div>
 
-      {/* Bottom Nav: Logo + Links */}
-      <nav className="bg-blue-600 text-white px-6 py-3 relative">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
+      {/* Navigation Bar */}
+      <nav className="bg-blue-600 text-white px-4 py-3 shadow-md relative">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
           {/* Logo */}
-          <Link to="/">
-            <div className="flex items-center space-x-2">
-              <div className="bg-yellow-500 rounded-md p-1">
-                <img
-                  src="https://images.unsplash.com/photo-1522780550166-284a0288c8df?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YW1hem9ufGVufDB8fDB8fHww"
-                  alt="Logo"
-                  className="h-10 w-10 object-contain"
-                />
-              </div>
-            </div>
+          <Link to="/" className="flex items-center space-x-2">
+            <img
+              src={Logo}
+              alt="Logo"
+              className="h-10 w-10 object-contain bg-white p-1 rounded"
+            />
           </Link>
 
-          {/* Hamburger Button */}
-          <div className="sm:hidden">
-            <button onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+          {/* Hamburger (Mobile) */}
+          <button onClick={() => setIsOpen(!isOpen)} className="sm:hidden">
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
 
-          {/* Nav Links */}
-          <div className="hidden sm:flex space-x-20 mx-30 text-lg">
+          {/* Nav Links (Desktop) */}
+          <div className="hidden sm:flex gap-12 text-md font-medium">
             <Link
               to="/category"
-              className="hover:underline"
+              className="hover:underline transition"
               onClick={() => {
                 dispatch(setCategoryId(null));
                 dispatch(setCategoryName("All Categories"));
@@ -69,26 +59,26 @@ const Navbar = () => {
             </Link>
             <Link
               to="/store"
-              className="hover:underline"
+              className="hover:underline transition"
               onClick={() => dispatch(resetStore())}
             >
               Top Stores
             </Link>
-            <Link to="/dealofday" className="hover:underline">
+            <Link to="/dealofday" className="hover:underline transition">
               Deals of the Day
             </Link>
-            <a href="#" className="hover:underline">
-              Share &amp; Earn
-            </a>
+            <Link to="#" className="hover:underline transition">
+              Share & Earn
+            </Link>
           </div>
         </div>
 
-        {/* Mobile Nav Links */}
+        {/* Mobile Menu */}
         {isOpen && (
-          <div className="flex flex-col sm:hidden mt-4 space-y-4 text-lg px-4">
+          <div className="sm:hidden mt-4 space-y-4 px-4 text-base font-medium">
             <Link
               to="/category"
-              className="hover:underline"
+              className="hover:underline block"
               onClick={() => {
                 dispatch(setCategoryId(null));
                 dispatch(setCategoryName("All Categories"));
@@ -99,7 +89,7 @@ const Navbar = () => {
             </Link>
             <Link
               to="/store"
-              className="hover:underline"
+              className="hover:underline block"
               onClick={() => {
                 dispatch(resetStore());
                 setIsOpen(false);
@@ -109,17 +99,17 @@ const Navbar = () => {
             </Link>
             <Link
               to="/dealofday"
-              className="hover:underline"
+              className="hover:underline block"
               onClick={() => setIsOpen(false)}
             >
               Deals of the Day
             </Link>
-            <a href="#" className="hover:underline" onClick={() => setIsOpen(false)}>
-              Share &amp; Earn
-            </a>
+            <Link to="#" className="hover:underline block" onClick={() => setIsOpen(false)}>
+              Share & Earn
+            </Link>
             <Link
               to="/admin/login"
-              className="hover:underline"
+              className="hover:underline block"
               onClick={() => setIsOpen(false)}
             >
               Login

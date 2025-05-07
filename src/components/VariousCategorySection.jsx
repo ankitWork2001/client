@@ -1,52 +1,52 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import {useDispatch } from 'react-redux'
-import { setCategoryId,setCategoryName } from '../redux/categorySlice'
+import { useDispatch } from 'react-redux'
+import { setCategoryId, setCategoryName } from '../redux/categorySlice'
 import { setCouponId } from '../redux/couponSlice'
 const VariousCategorySection = () => {
     const [categories, setCategories] = React.useState()
-    useEffect(()=>{
+    useEffect(() => {
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
             url: `${import.meta.env.VITE_APP_BACKEND}api/coupons`,
-            
-          };
-          
-          async function makeRequest() {
+
+        };
+
+        async function makeRequest() {
             try {
-              const response = await axios.request(config);
-            //   console.log(JSON.stringify(response.data));
-            let data=response.data;
-            let map=new Map();
-            data.forEach((item)=>{
-                if(!map.has(item.category.name)){
-                    map.set(item.category.name,[])
-                }
-                map.get(item.category.name).push(item);
-            });
-            let result=Array.from(map.entries()).map(([key, value]) => ({ category: key, coupons: value }));
-            console.log(result);
-            setCategories(result);
+                const response = await axios.request(config);
+                //   console.log(JSON.stringify(response.data));
+                let data = response.data;
+                let map = new Map();
+                data.forEach((item) => {
+                    if (!map.has(item.category.name)) {
+                        map.set(item.category.name, [])
+                    }
+                    map.get(item.category.name).push(item);
+                });
+                let result = Array.from(map.entries()).map(([key, value]) => ({ category: key, coupons: value }));
+                console.log(result);
+                setCategories(result);
             }
             catch (error) {
-              console.log(error);
+                console.log(error);
             }
-          }
-          
-          makeRequest();
-    },[])
-  return (
-    <div className="w-[90vw] m-auto mt-5">
-        {categories && categories?.map((item) => (
-            <IndividualCategorySection key={item.category} coupons={item.coupons} name={item.category} />
-        ))}
-    </div>
-  )
+        }
+
+        makeRequest();
+    }, [])
+    return (
+        <div className="w-[90vw] m-auto mt-5">
+            {categories && categories?.map((item) => (
+                <IndividualCategorySection key={item.category} coupons={item.coupons} name={item.category} />
+            ))}
+        </div>
+    )
 }
 
-const IndividualCategorySection = ({coupons,name}) => {
+const IndividualCategorySection = ({ coupons, name }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleClick = () => {
@@ -55,9 +55,9 @@ const IndividualCategorySection = ({coupons,name}) => {
         dispatch(setCategoryId(coupons[0].category._id))
         dispatch(setCategoryName(name))
         navigate(`/category`);
-        
+
     };
-    
+
     return (
         <div id={name} className="mb-12">
             <div className="flex justify-between items-center mb-4">
@@ -73,13 +73,13 @@ const IndividualCategorySection = ({coupons,name}) => {
     )
 }
 
-const CouponCategoryCard=({logo,brand,desc,id})=>{
+const CouponCategoryCard = ({ logo, brand, desc, id }) => {
     const dispatch = useDispatch();
-      const navigate = useNavigate();
-      const handleClick = () => {
+    const navigate = useNavigate();
+    const handleClick = () => {
         dispatch(setCouponId(id));
         navigate("/coupon");
-      }
+    }
     return (
         <div className="w-70 border border-gray-200 rounded-lg shadow-md transition-shadow duration-300 p-4 flex flex-col items-center">
             <div className="w-26 h-26 mb-4 flex items-center justify-center">
