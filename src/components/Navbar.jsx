@@ -18,7 +18,7 @@ const Navbar = () => {
           {/* Logo Section (remains as you had it) */}
           <Link to="/" className="flex items-center">
             <div className="relative">
-              <div className="w-20 h-20 bg-yellow-500 rounded-lg flex items-center justify-center shadow-md transform -translate-y-1 hover:scale-105 transition-transform">
+              <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center shadow-md transform -translate-y-1 hover:scale-105 transition-transform">
                 <img
                   src={Logo}
                   alt="Logo"

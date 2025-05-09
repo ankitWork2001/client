@@ -80,7 +80,8 @@ const IndividualCategorySection = ({ coupons, name }) => {
                         id={coupon._id} 
                         logo={coupon.store.logo} 
                         brand={coupon.store.name} 
-                        desc={coupon.description} 
+                        desc={coupon.description}
+                        couponCode={coupon.couponCode} 
                     />
                 ))}
             </div>
@@ -88,7 +89,7 @@ const IndividualCategorySection = ({ coupons, name }) => {
     )
 }
 
-const CouponCategoryCard = ({ logo, brand, desc, id }) => {
+const CouponCategoryCard = ({ logo, brand, desc, id, couponCode }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleClick = () => {
@@ -104,12 +105,21 @@ const CouponCategoryCard = ({ logo, brand, desc, id }) => {
             <p className="text-black text-sm text-center mb-4">
                 {desc ? (desc.length > 100 ? `${desc.slice(0, 100)}...` : desc) : 'Versatile, durable, and thoughtfully made to suit your needs with quality you can trust daily.'}
             </p>
-            <button 
-                onClick={handleClick} 
-                className="mt-auto bg-orange-400 hover:bg-orange-500 text-white px-4 py-2 rounded transition-colors duration-300 cursor-pointer text-sm sm:text-base"
-            >
-                Get Deal
-            </button>
+            
+            {/* Updated Get Deal Button with Coupon Code */}
+            <div className="mt-6 p-4 pt-10 relative w-full">
+                <div className="absolute h-13 bottom-4 right-[6.5rem] bg-white border-dashed border-2 border-gray-300 text-gray-500 py-2 px-4 rounded items-center flex justify-center">
+                    <span className="font-mono">{couponCode || 'save10'}</span>
+                </div>
+                <div className="flex justify-end">
+                    <button 
+                        onClick={handleClick}
+                        className="bg-[#ff6a00] hover:bg-orange-600 text-white px-8 py-3 rounded font-medium text-lg transition-colors duration-200 z-10"
+                    >
+                        Get Deal
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }
