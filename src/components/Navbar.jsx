@@ -4,7 +4,7 @@ import { setCategoryId, setCategoryName } from "../redux/categorySlice";
 import { resetStore } from "../redux/storeSlice";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import Logo from "../../assets/Logo3.jpg"; // Your imported logo
+import Logo from "../../assets/Logo.png"; // Your imported logo
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -17,17 +17,19 @@ const Navbar = () => {
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-4 sm:gap-8">
           {/* Logo Section (remains as you had it) */}
           <Link to="/" className="flex items-center">
-            <div className="relative">
-              <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center shadow-md transform -translate-y-1 hover:scale-105 transition-transform">
+            <div className="relative group">
+              <div className="w-[79px] h-[71px] bg-white rounded-[9px] flex items-center justify-center shadow-md transition-transform group-hover:scale-105 group-hover:shadow-[0px_1px_4px_0px_#3771C8D6]">
                 <img
                   src={Logo}
                   alt="Logo"
-                  className="w-16 h-16 object-contain p-1"
+                  className="w-[79px] h-[71px] object-contain p-1"
                 />
               </div>
             </div>
           </Link>
-  
+
+
+
           {/* Search Bar */}
           <div className="flex flex-1">
             <input
@@ -41,7 +43,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-  
+
       {/* Navigation Bar */}
       <nav className="bg-blue-600 text-white px-4 py-3 shadow-md relative">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
@@ -49,7 +51,7 @@ const Navbar = () => {
           <button onClick={() => setIsOpen(!isOpen)} className="sm:hidden">
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
-  
+
           {/* Nav Links (Desktop) */}
           <div className="hidden sm:flex gap-12 text-md font-medium mx-auto">
             <Link
@@ -77,7 +79,7 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
-  
+
         {/* Mobile Menu */}
         {isOpen && (
           <div className="sm:hidden mt-4 space-y-4 px-4 text-base font-medium">
@@ -121,7 +123,7 @@ const Navbar = () => {
       </nav>
     </>
   );
-  
+
 };
 
 export default Navbar;
