@@ -1,4 +1,4 @@
-import React from "react";
+import SeoTags from "./SeoTags";
 
 const CategoryCard = ({ image, name, totalCoupons }) => {
   const scrollToCategory = () => {
@@ -24,6 +24,16 @@ const CategoryCard = ({ image, name, totalCoupons }) => {
         {name}
       </p>
       <p className="text-xs sm:text-sm text-gray-500 mt-1">{totalCoupons} offers</p>
+      <SeoTags
+        title="Smart Coupons & Promo Codes | CouponSmartDeals"
+        description="Use smart coupons and promo codes to save online! CouponSmartDeals brings the best offers from top brands. Explore discounts, deals, and savings."
+        canonical="https://www.couponsmartdeals.com"
+      />
+      <SeoTags
+        title="Smart Coupons & Promo Codes | CouponSmartDeals"
+        description="Use smart coupons and promo codes to save online! CouponSmartDeals brings the best offers from top brands. Explore discounts, deals, and savings."
+        canonical="https://www.couponsmartdeals.com"
+      />
     </div>
   );
 };
