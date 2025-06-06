@@ -45,13 +45,18 @@ const router = createBrowserRouter([
         element:<DealOfDay/>
       },
       {
-        path: "/dealofday/coupon",
+        path: "/dealofday/coupon/:couponId",
         element: <CouponPage/>
       },
       {
-        path:"/category/coupon",
-        element:<CouponPage/>
+        path: "/category/coupon/:couponId",
+        element: <CouponPage />,
       },
+      {
+        path: "/store/coupon/:couponId",
+        element: <CouponPage />,
+      },
+
       {
         path:"/aboutus",
         element:<AboutUs/>

@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  couponId:"67fa20572e5d38b2c8450f74",
+  couponId:null,
 }
 
 const couponSlice = createSlice({
